@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="User Data">
+        <template if:true={wallet}>
+            <!--if wallet variable have value, then it will display this template-->
+            <template for:each={wallet} for:item="wall">
+                <!--iterate through received data-->
+                <lightning-layout key={wall.Id} multiple-rows="true">
+                    <lightning-layout-item size="6">
+                        <p style="padding-left: 20px">Wallet ID: <lightning-formatted-text value={wall.Name}>
+                            </lightning-formatted-text>
+                        </p>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6">
+                        <p>
+                            Current Balance: <lightning-formatted-number value={wall.Balance__c} format-style="currency"
+                                currency-code="USD"></lightning-formatted-number>
+                        </p>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Add Money to Wallet" icon-name="custom:custom17">
+        <template if:true={wallet}>
+            <template for:each={wallet} for:item="wall">
+                <lightning-record-edit-form key={wall.Id} object-api-name="Wallet__c">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <lightning-messages></lightning-messages>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <lightning-input-field field-name="Balance__c" value={balance} onchange={handleBal}>
+                            </lightning-input-field>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <lightning-button variant="brand" label="Add Money" class="button" type="button"
+                                onclick={updateBalance}>
+                            </lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-record-edit-form>
+            </template>
+        </template>
+        <template if:false={wallet}>
+            <p class="slds-body">
+                No Wallet Records Available
+            </p>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Send Money" icon-name="custom:custom17">
+        <lightning-button variant="brand" label="Send Money" class="button" type="button" onclick={sendMoney}>
+        </lightning-button>
+    </lightning-card>
+</template>

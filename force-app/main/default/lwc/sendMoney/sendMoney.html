@@ -1,0 +1,12 @@
+<template>
+    <lightning-card>
+        <lightning-record-edit-form object-api-name="Pals__c">
+            <lightning-input-field field-name="user__c" value={palName} onchange={handlepal}>
+            </lightning-input-field>
+        </lightning-record-edit-form>
+        <br />
+        <lightning-input type="number" name="amount" label="Amount" value={amount} onchange={handleamount}>
+        </lightning-input>
+        <lightning-button variant="brand" label="Send" onclick={sendMoney}></lightning-button>
+    </lightning-card>
+</template>

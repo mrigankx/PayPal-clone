@@ -1,0 +1,72 @@
+<template>
+    <table if:true={pbook} class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Passbook Name">Passbook Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="User">User Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Vendor Name">Vendor Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Amount">Amount</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Date/Time">Date/Time</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Expense Description">Expense Description</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Comments">Comments</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!--iterate all opps records using for-each iteration -->
+                <template for:each={pbook} for:item="pb">
+                    <tr class="slds-hint-parent" key={pb.Id}>
+                        <td>
+                            <div class="slds-truncate">{pb.Name}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{pb.User__r.Name}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{pb.Vendor_name__c}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">
+                                <lightning-formatted-number value={pb.Amount__c} format-style="currency"
+                                    currency-code="USD"></lightning-formatted-number>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">
+                                <lightning-formatted-date-time value={pb.Date_Time__c} year="numeric" month="numeric"
+                                    day="numeric" hour="2-digit" minute="2-digit" time-zone-name="short" hour12="true">
+                                </lightning-formatted-date-time>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{pb.Expense_description__c}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{pb.Comment__c}</div>
+                        </td>
+                        <td>
+                            <lightning-button label="Send" data-id={pb.Id} variant="brand" onclick={sendRecord}>
+                            </lightning-button>
+                        </td>
+
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+</template>

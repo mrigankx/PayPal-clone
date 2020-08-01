@@ -1,0 +1,89 @@
+<aura:component
+    implements="lightning:actionOverride,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId"
+    access="global" controller="DisplayTheBills">
+    <aura:attribute name="bills" type="Bills__c" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="init" value="{!this}" action="{!c.buttonAction}" />
+    <table class="myClass slds-table slds-table--bordered slds-table--cell-buffer">
+        <thead>
+            <tr class="slds-text-heading--label">
+                <th scope="col">
+                    <div class="slds-truncate" title="Bill Name">Bill Name</div>
+                </th>
+
+                <th scope="col">
+                    <div class="slds-truncate" title="Location">Location</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Category">Category</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Amount">Amount</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Offer Applied">Offer Applied</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Pay Before">Pay Before</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Paid">Paid</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Successful">Successful</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="ForUser">ForUser</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Id">Id</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.bills}" var="bill">
+                <tr>
+                    <td data-label="Bill Name" scope="row">
+                        <div class="slds-truncate" title="Bill Name">{!bill.Name}</div>
+                    </td>
+                    <td data-label="Location" scope="row">
+                        <div class="slds-truncate" title="Location">{!bill.Location__c}</div>
+                    </td>
+                    <td data-label="Category" scope="row">
+                        <div class="slds-truncate" title="Category">{!bill.Category__c}</div>
+                    </td>
+                    <td data-label="Amount" scope="row">
+                        <div class="slds-truncate" title="Amount">{!bill.Amount__c}</div>
+                    </td>
+                    <td data-label="Offer Applied" scope="row">
+                        <div class="slds-truncate" title="Offer Applied">{!bill.Offer_applied__c}</div>
+                    </td>
+                    <td data-label="Pay Before" scope="row">
+                        <div class="slds-truncate" title="Pay Before">{!bill.Pay_before__c}</div>
+                    </td>
+                    <td data-label="Paid" scope="row">
+                        <div class="slds-truncate" title="Paid">{!bill.Paid__c}</div>
+                    </td>
+                    <td data-label="Successful" scope="row">
+                        <div class="slds-truncate" title="Successful">{!bill.Successful__c}</div>
+                    </td>
+                    <td data-label="ForUser" scope="row">
+                        <div class="slds-truncate" title="ForUser">{!bill.for_user__c}</div>
+                    </td>
+                    <td data-label="Id" scope="row">
+                        <div class="slds-truncate" title="Id">{!bill.Bill_id__c}</div>
+                    </td>
+                    <!--<td data-label="Id" scope="row"><div class="slds-truncate" title="Id"><lightning:button label="Pay"
+            onclick="{!c.buttonAction}"><span data-love="{!bill.Id}" onclick="{!c.buttonAction}">{!bill.Id}</span></lightning:button></div></td>-->
+                    <td data-label="Id" scope="row">
+                        <div class="slds-truncate" title="Id">
+                            <lightning:button type="button" label="Pay" onclick="{!c.buttonAction}"
+                                value="{!bill.Id}" />
+                        </div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>

@@ -1,0 +1,26 @@
+<aura:component implements="lightning:actionOverride,flexipage:availableForAllPageTypes" controller="Override_Wallet">
+    <aura:attribute name="acc" type="Wallet__c" default="{'sobjectType': 'Wallet__c',
+                                                       	'Name':'',
+                                                       'Balance__c':'','Date_Time__c':''}" />
+    <aura:attribute name="WalletList" type="Wallet__c[]" />
+    <aura:attribute name="contactId" type="String" />
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="errors" type="Object" default="[]" />
+    <aura:attribute name="draftValues" type="Object" default="[]" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }" />
+    <div class="slds-m-around-xx-large">
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <lightning:input type="text" aura:id="WalletName" label="Wallet Name" value="{!v.acc.Name}"
+                    class="slds-input" />
+                <lightning:input type="decimal" aura:id="WalletBalance" label="Wallet Balance"
+                    value="{!v.acc.Balance__c}" class="slds-input" />
+                <lightning:input type="datetime" aura:id="DateTime" label="Date Time" value="{!v.acc.Date_Time__c}"
+                    class="slds-input" />
+            </div>
+        </div>
+        <button class="slds-button slds-button--brand" onclick="{!c.createWallet}">Save</button>
+        
+    </div>
+</aura:component>
